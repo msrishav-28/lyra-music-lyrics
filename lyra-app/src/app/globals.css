@@ -1,48 +1,55 @@
 /**
  * src/app/globals.css
- * Global styles for Lyra. Imports Tailwind and sets the base dark theme.
- * Audio-reactive CSS variables (--bpm, --energy, --bass, etc.) are
- * updated at 30fps by the VisualEngine and consumed here by background animations.
+ * Global styles + CSS keyframe animations for the gradient background.
+ * Audio-reactive variables are pushed to :root by useVisualEngine at 30fps.
  */
 @import "tailwindcss";
 
-/* ---- Base tokens (static) ---- */
+/* ---- Design tokens ---- */
 :root {
-  --background:   #07070B;
-  --surface:      #0B0B12;
+  --background: #07070B;
+  --surface: #0B0B12;
   --text-primary: rgba(255, 255, 255, 0.92);
-  --text-muted:   rgba(255, 255, 255, 0.38);
+  --text-muted: rgba(255, 255, 255, 0.38);
 
-  /* ---- Audio-reactive variables (defaults; overwritten by VisualEngine) ---- */
-  --bpm:    120;
+  /* Audio-reactive defaults (overwritten by useVisualEngine) */
+  --bpm: 120;
   --energy: 0;
-  --bass:   0;
-  --mid:    0;
+  --bass: 0;
+  --mid: 0;
   --treble: 0;
-  --hueA:   260;
-  --hueB:   200;
-  --hueC:   320;
-  --flow:   1;
-  --scrim:  0.28;
+  --hueA: 270;
+  --hueB: 310;
+  --hueC: 200;
+  --flow: 1;
+  --scrim: 0.28;
 }
 
-/* ---- Reset / base ---- */
-*, *::before, *::after {
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html, body {
+html {
   height: 100%;
+  /* Dynamic viewport for mobile browsers */
+  min-height: -webkit-fill-available;
+}
+
+body {
+  min-height: 100dvh;
   background: var(--background);
   color: var(--text-primary);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-inter, system-ui), -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   overscroll-behavior: none;
 }
 
-/* ---- Acrylic surface utility ---- */
+/* ---- Acrylic surface ---- */
 .acrylic {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.10);
@@ -53,7 +60,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Subtle top-edge highlight (glass sheen) */
+/* Top-edge glass sheen */
 .acrylic::before {
   content: "";
   position: absolute;
@@ -63,4 +70,82 @@ html, body {
   background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.18), transparent 55%);
   mix-blend-mode: overlay;
   opacity: 0.35;
+}
+
+/* ---- Background gradient keyframes ---- */
+/* Each layer drifts independently using `calc(Xs / var(--flow))` for BPM-driven speed */
+
+@keyframes drift-a {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+
+  50% {
+    transform: translate(4%, -6%) scale(1.08);
+  }
+
+  100% {
+    transform: translate(-3%, 4%) scale(0.97);
+  }
+}
+
+@keyframes drift-b {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+
+  50% {
+    transform: translate(-5%, 5%) scale(1.06);
+  }
+
+  100% {
+    transform: translate(4%, -3%) scale(1.02);
+  }
+}
+
+@keyframes drift-c {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+
+  50% {
+    transform: translate(3%, 7%) scale(0.96);
+  }
+
+  100% {
+    transform: translate(-4%, -5%) scale(1.05);
+  }
+}
+
+/* ---- Reduce motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes drift-a {
+    from {
+      transform: none;
+    }
+
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes drift-b {
+    from {
+      transform: none;
+    }
+
+    to {
+      transform: none;
+    }
+  }
+
+  @keyframes drift-c {
+    from {
+      transform: none;
+    }
+
+    to {
+      transform: none;
+    }
+  }
 }
