@@ -1,0 +1,66 @@
+/**
+ * src/app/globals.css
+ * Global styles for Lyra. Imports Tailwind and sets the base dark theme.
+ * Audio-reactive CSS variables (--bpm, --energy, --bass, etc.) are
+ * updated at 30fps by the VisualEngine and consumed here by background animations.
+ */
+@import "tailwindcss";
+
+/* ---- Base tokens (static) ---- */
+:root {
+  --background:   #07070B;
+  --surface:      #0B0B12;
+  --text-primary: rgba(255, 255, 255, 0.92);
+  --text-muted:   rgba(255, 255, 255, 0.38);
+
+  /* ---- Audio-reactive variables (defaults; overwritten by VisualEngine) ---- */
+  --bpm:    120;
+  --energy: 0;
+  --bass:   0;
+  --mid:    0;
+  --treble: 0;
+  --hueA:   260;
+  --hueB:   200;
+  --hueC:   320;
+  --flow:   1;
+  --scrim:  0.28;
+}
+
+/* ---- Reset / base ---- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* ---- Acrylic surface utility ---- */
+.acrylic {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top-edge highlight (glass sheen) */
+.acrylic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.18), transparent 55%);
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
