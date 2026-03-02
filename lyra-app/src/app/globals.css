@@ -14,15 +14,15 @@
 
   /* Audio-reactive defaults (overwritten by useVisualEngine) */
   --bpm: 120;
-  --energy: 0;
-  --bass: 0;
-  --mid: 0;
-  --treble: 0;
+  --energy: 0.15;
+  --bass: 0.12;
+  --mid: 0.10;
+  --treble: 0.08;
   --hueA: 270;
   --hueB: 310;
   --hueC: 200;
   --flow: 1;
-  --scrim: 0.28;
+  --scrim: 0.22;
 }
 
 /* ---- Reset ---- */

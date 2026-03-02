@@ -13,8 +13,9 @@ export default function AnimatedBackground() {
                 className="absolute inset-0"
                 style={{
                     background: `radial-gradient(ellipse 80% 70% at 30% 40%,
-            hsl(var(--hueA), 70%, 28%) 0%,
+            hsl(var(--hueA), 72%, 36%) 0%,
             transparent 70%)`,
+                    opacity: 0.85,
                     animation: 'drift-a calc(8s / var(--flow, 1)) ease-in-out infinite alternate',
                 }}
             />
@@ -23,8 +24,9 @@ export default function AnimatedBackground() {
                 className="absolute inset-0"
                 style={{
                     background: `radial-gradient(ellipse 60% 60% at 75% 65%,
-            hsl(var(--hueB), 80%, 22%) 0%,
+            hsl(var(--hueB), 82%, 30%) 0%,
             transparent 65%)`,
+                    opacity: 0.80,
                     animation: 'drift-b calc(11s / var(--flow, 1)) ease-in-out infinite alternate-reverse',
                 }}
             />
@@ -33,8 +35,9 @@ export default function AnimatedBackground() {
                 className="absolute inset-0"
                 style={{
                     background: `radial-gradient(ellipse 40% 50% at 15% 80%,
-            hsl(var(--hueC), 60%, 18%) 0%,
+            hsl(var(--hueC), 62%, 26%) 0%,
             transparent 60%)`,
+                    opacity: 0.70,
                     animation: 'drift-c calc(14s / var(--flow, 1)) ease-in-out infinite alternate',
                 }}
             />
