@@ -205,7 +205,7 @@ export default function LyraPage() {
   return (
     <main
       className="relative min-h-dvh flex flex-col items-center overflow-hidden"
-      style={{ background: '#07070B' }}
+      style={{ background: 'var(--background)' }}
       onClick={(e) => {
         // Tap anywhere to reveal controls
         const target = e.target as HTMLElement;
